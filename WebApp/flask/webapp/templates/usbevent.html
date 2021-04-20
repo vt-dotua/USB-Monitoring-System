@@ -1,0 +1,62 @@
+{% extends "menu.html" %}
+{% block contant%}
+<div class="search-menu contant">
+    <div class="user-info line-bottom">
+        <span>{{ IdHostMac[1] }}</span>
+        <span>{{ IdHostMac[2] }}</span>
+        <span>{{ IdHostMac[3] }}</span>
+    </div>
+    <div class="spoiler-zagolovok-search button1">Пошук</div>
+    <div class="spoiler-search-body">
+        <form id="formSearch" method="POST" action="/usbevent"  class = "flex-container">
+            {{ form.hidden_tag() }}
+            <div class="flex-container-inside">
+                <div>
+                    {{ form.dateFrom.label}}
+                    {{ form.dateFrom(id = "dFrom", class_ = "input-field-syle wDate input-margin") }}
+                </div>
+                <div>
+                    {{ form.dateTo.label}}
+                    {{ form.dateTo(id="dTo", class_ = "input-field-syle wDate input-margin") }}
+                </div>
+                <div>
+                    {{ form.timeFrom.label}}
+                    {{ form.timeFrom(id="tFrom", class_ = "input-field-syle wTime input-margin") }}
+                </div>
+                <div>
+                    {{ form.timeTo.label}}
+                    {{ form.timeTo(id="tTo",class_ = "input-field-syle wTime input-margin")}}
+                </div>
+            </div>
+           
+            <div class="flex-container-inside">
+                <div>
+                    {{ form.vid(class_ = "input-field-syle wPidVid input-margin",placeholder="Введіть vid")}}
+                </div>
+                <div>
+                    {{ form.pid(class_ = "input-field-syle wPidVid input-margin",placeholder="Введіть pid")}}
+                </div>
+                <div>
+                    {{ form.sn(class_ = "input-field-syle wSN input-margin",placeholder="Введіть серійний номер")}}
+                </div>
+            </div>
+            <div>
+                {{form.typeEvent}}
+             </div>
+            <input type="hidden" name="idpage" value={{id}}>
+            <div>
+                <button class="button1 btn btn-width" type="submit"> Знайти </button>
+            </div>
+        </form>
+    </div>
+    <div class="table-header line-bottom"><span class="w-t-data">Дата</span> <span class="w-t-time">Час</span> <span class="w-t-type">Тип події</span> <span class="w-t-VID">VID</span><span class="w-t-PID">PID</span><span class="w-t-SN">Серійний номер</span></div>
+    {% if listUsbEvent %}
+        {% for v in listUsbEvent %}
+            <div class="table-row line-bottom"><span class="w-t-data">{{v[0]}}</span><span class="w-t-time">{{v[1]}}</span> <span class="w-t-type">{{v[2]}}</span> <span class="w-t-VID">{{v[3]}}</span> <span class="w-t-PID">{{v[4]}}</span><span class="w-t-SN">{{v[5]}}</span></div>
+        {% endfor %}
+    {% else %}
+    <div class="table-header line-bottom"><span class="w-t-data">------------</span> <span class="w-t-time">------------</span> <span class="w-t-type">------------</span> <span class="w-t-VID">---------</span><span class="w-t-PID">----------</span><span class="w-t-SN">------------</span></div>
+    {% endif %} 
+    </div>   
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends "menu.html" %}
+{% block contant%}
+    <div class="contant">
+        <h1 class="line-bottom hMargin">Управління користувачами</h1>
+        <div class="spoiler-zagolovok-manage-add button1 width-button-manage">Дадати користувача</div>
+        <div class = "add-user">
+            <form action="/manageuser"  method="POST">
+                {{ formAdd.hidden_tag() }}
+                <div>
+                    {{ formAdd.username(class_ = "input-field-syle", placeholder="І'мя користувача")}}
+                </div>
+                <div>
+                    {{ formAdd.email( class_ = "input-field-syle", placeholder="Email")}}
+                </div>
+                <div>
+                    {{ formAdd.surname(class_ = "input-field-syle", placeholder="Призвище")}}
+                </div>
+                <div>
+                    {{ formAdd.name( class_ = "input-field-syle", placeholder="І'мя")}}
+                </div>
+                <div>
+                    {{ formAdd.ochestvo( class_ = "input-field-syle", placeholder="Ім'я по батькові")}}
+                </div>
+                <div>
+                    {{ formAdd.password( class_ = "input-field-syle", placeholder="Пароль")}}
+                </div>
+                <div>
+                    {{ formAdd.adminOrNot}}
+                </div>
+                {{ formAdd.submit( class_ = "button1 btn btn-width") }}
+            </form>
+        </div>
+        <div class="spoiler-zagolovok-manage-delete button1 width-button-manage">Видалити користувача</div>
+        <div class = "remove-user">
+            <form action="/manageuser"  method="POST">
+                {{ formDelete.hidden_tag() }}
+                <div class="table-header line-bottom"><span class="w-delete">Видалити</span> <span class="w-username">Ім'я користувача</span> <span class="w-email">Почта</span> <span class="w-right">Права</span></div>
+                {% if  allUser %}
+                    {% for v in allUser %}
+                        <div class="table-row line-bottom"><span class="w-delete"><input class="checkbox-style {% if v[6] %} admin {%endif%}" type="checkbox" name="option.{{v[0]}}" value="{{v[0]}}" {% if v[6] and amountAdmin < 2 %} disabled {%endif%} ></span> <span class="w-username">{{ v[1] +" " + v[2]}}</span> <span class="w-email">{{ v[5]}}</span> <span class="w-right">{% if v[6] %} Admin {% else %} User {%endif%} </span></div> 
+                    {% endfor %}
+                    {{ formDelete.submit( class_ = "button1 btn mt") }}
+                {% else %}
+                    Бананів нема!
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock %}

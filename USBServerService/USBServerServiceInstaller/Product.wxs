@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define USBServerService_TargetDir=$(var.USBServerService.TargetDir)?>
+	<Product Id="*" Name="USBServerService" Language="1033" Version="1.0.0.0" Manufacturer="VT" UpgradeCode="6f15b82f-bfd2-4d62-b7e9-8f6ca0af8e71">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="USBServerService" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="USBServerServiceInstaller" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+			<Component Id="USBServerService.exe" Guid="ae68a0ba-348a-4ef2-b188-859aa97a985a">
+			  <File Id="USBServerService.exe"
+              Name="USBServerService.exe"
+              Source="$(var.USBServerService_TargetDir)USBServerService.exe"
+              KeyPath="yes"/>
+
+        <ServiceInstall Id="ServiceInstaller"
+                        Type="ownProcess"
+                        Name="USBServerService"
+                        DisplayName="USB Server Service"
+                        Description="A Test Service that logs dummy text on an interval to a text file."
+                        Start="auto"
+                        ErrorControl="normal" />
+
+        <ServiceControl Id="StartService"
+                        Start="install"
+                        Stop="both" Remove="uninstall"
+                        Name="USBServerService"
+                        Wait="yes" />
+			</Component>
+      
+			<Component Id="USBServerService.exe.config" Guid="0ad4c065-879d-4c78-8aa9-1fe79a4fd6d5">
+			  <File Id="USBServerService.exe.config"
+              Name="USBServerService.exe.config"
+              Source="$(var.USBServerService_TargetDir)USBServerService.exe.config"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="System.Memory.dll" Guid="736d8768-f342-47d9-addf-20e7197208ab">
+			  <File Id="System.Memory.dll"
+              Name="System.Memory.dll"
+              Source="$(var.USBServerService_TargetDir)System.Memory.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="Npgsql.dll" Guid="0d65625c-2a31-4942-a1a6-62d987935d5d">
+			  <File Id="Npgsql.dll"
+              Name="Npgsql.dll"
+              Source="$(var.USBServerService_TargetDir)Npgsql.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="Newtonsoft.Json.dll" Guid="81fca3f1-c28c-4378-861c-fe8f2c2f987c">
+			  <File Id="Newtonsoft.Json.dll"
+              Name="Newtonsoft.Json.dll"
+              Source="$(var.USBServerService_TargetDir)Newtonsoft.Json.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="System.Numerics.Vectors.dll" Guid="af617c85-1365-4548-914c-f36ab9ebf1ce">
+			  <File Id="System.Numerics.Vectors.dll"
+              Name="System.Numerics.Vectors.dll"
+              Source="$(var.USBServerService_TargetDir)System.Numerics.Vectors.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="System.Runtime.CompilerServices.Unsafe.dll" Guid="17a25610-8f94-486b-8a17-d45e7be54d5c">
+			  <File Id="System.Runtime.CompilerServices.Unsafe.dll"
+              Name="System.Runtime.CompilerServices.Unsafe.dll"
+              Source="$(var.USBServerService_TargetDir)System.Runtime.CompilerServices.Unsafe.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="System.Buffers.dll" Guid="a5aa6656-0dde-441b-b395-930c75b6a3d9">
+			  <File Id="System.Buffers.dll"
+              Name="System.Buffers.dll"
+              Source="$(var.USBServerService_TargetDir)System.Buffers.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="System.Threading.Tasks.Extensions.dll" Guid="eb907503-41c9-4307-afa8-e615f0ca62e8">
+			  <File Id="System.Threading.Tasks.Extensions.dll"
+              Name="System.Threading.Tasks.Extensions.dll"
+              Source="$(var.USBServerService_TargetDir)System.Threading.Tasks.Extensions.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="System.Threading.Channels.dll" Guid="a721da88-2fea-4517-8351-0e4f4cd08997">
+			  <File Id="System.Threading.Channels.dll"
+              Name="System.Threading.Channels.dll"
+              Source="$(var.USBServerService_TargetDir)System.Threading.Channels.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="Microsoft.Bcl.AsyncInterfaces.dll" Guid="9a6ecda8-0613-418b-bc33-0867cf57e65e">
+			  <File Id="Microsoft.Bcl.AsyncInterfaces.dll"
+              Name="Microsoft.Bcl.AsyncInterfaces.dll"
+              Source="$(var.USBServerService_TargetDir)Microsoft.Bcl.AsyncInterfaces.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="System.Text.Json.dll" Guid="9ebcb3fd-4ed0-4cf6-917b-8d06613c6fc7">
+			  <File Id="System.Text.Json.dll"
+              Name="System.Text.Json.dll"
+              Source="$(var.USBServerService_TargetDir)System.Text.Json.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="System.Text.Encodings.Web.dll" Guid="e069822a-5cb4-48bc-9794-fbe1eec31aff">
+			  <File Id="System.Text.Encodings.Web.dll"
+              Name="System.Text.Encodings.Web.dll"
+              Source="$(var.USBServerService_TargetDir)System.Text.Encodings.Web.dll"
+              KeyPath="yes"/>
+			</Component>
+      
+			<Component Id="System.ValueTuple.dll" Guid="8a2cd7bc-6254-4dcb-829c-b634d2b0b42a">
+			  <File Id="System.ValueTuple.dll"
+              Name="System.ValueTuple.dll"
+              Source="$(var.USBServerService_TargetDir)System.ValueTuple.dll"
+              KeyPath="yes"/>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

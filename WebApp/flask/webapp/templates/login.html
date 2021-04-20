@@ -1,0 +1,35 @@
+﻿{% extends "base.html" %}
+
+{% block login %}
+<div class="wrap-form">
+    <div class="form-login">
+        <h1 class="line-bottom">Вхід</h1>
+        <form method="POST" action="/login">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label}}<br>
+                {{ form.username(class_ = "input-field-syle w-log m-bottom") }}
+            </p>
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(class_ = "input-field-syle w-log m-bottom") }}<br>
+            </p>
+            <p>
+                <button class="btn button1 m-bottom btn-width" type="submit"> Війти </button>
+            </p>
+            <p>
+                <a href="{{url_for('ForgotPassword')}}">Забули пароль?</a>
+            </p>
+            {% if error %}
+            <br>
+            <div class="wrong-login">
+                <p>
+                    {{error}}
+                </p>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}
+

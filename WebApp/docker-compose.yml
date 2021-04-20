@@ -1,0 +1,62 @@
+version: "3.7"
+
+services:
+  db:
+    build: ./database
+    container_name: postgresql
+    restart: always
+    environment:
+        POSTGRES_PASSWORD: example
+    ports:
+        - "5433:5432"
+    volumes:
+      - postgresqldata:/var/lib/postgresql/data
+    networks:
+      - usbmonitoringapp
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: example@domain.com
+      PGADMIN_DEFAULT_PASSWORD: example
+    ports:
+      - "81:80"
+    networks:
+      - usbmonitoringapp
+
+  flask:
+    build: ./flask
+    container_name: flask
+    restart: always
+    environment:
+      - DATABASE_NAME=usbapp
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=example
+    expose:
+      - 8080
+    depends_on:
+      - "db"
+      - "nginx"
+    networks:
+      - usbmonitoringapp 
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - usbmonitoringapp 
+
+networks:
+  usbmonitoringapp:
+    driver: bridge
+
+volumes:
+  postgresqldata:
+    driver: local
+   
+     

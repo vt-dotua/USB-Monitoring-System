@@ -1,0 +1,28 @@
+{% extends "menu.html" %}
+{% block contant%}
+    <div class="contant">
+        <h1 class="line-bottom hMargin"> Видалити хост </h1>
+        <div class = "remove-user">
+            <form method="POST" action="/delete_event_main">
+                {{ form.hidden_tag() }}
+                {{ form.hostname(class_ = "input-field-syle inputH",  placeholder="Введіть ім'я" ) }}
+                {{ form.mac(class_ = "input-field-syle inputH", placeholder="Введіть мак-адресу")}}
+                {{ form.submit( class_ = "button1 btn") }}
+            </form>
+            <form action="/delete_event_main"  method="POST">
+                    {{ formDelete.hidden_tag() }}
+                    <div class="table-headerH line-bottom hcenter"><span class="w-delete">Видалити</span><span class="w-NameH">Ім'я</span> <span class="w-MacH">IP/Мак-адреса</span> <span class="w-countH">Кількість подій</span></div>
+                    {% if allUsbEvent %}
+                    {% for v in allUsbEvent %}
+                    <div class="line-bottom rol">
+                        <span id="w-d-event" class="w-delete"><input class="checkbox-style checkbox-merg" type="checkbox" name="option.{{v[0]}}" value="{{v[0]}}"></span> <a href="{{ url_for('delete_childe', id=v[0])}}"><div class="hcenter table-rowH12"><span class="w-NameH">{{v[1]}}</span><span class="w-MacH">{{v[6]}}<br>{{v[2]}}</span> <span class="w-countH">{{v[3]}}</span></div></a>
+                    </div>
+                    {% endfor %}
+                    {{ formDelete.submit( class_ = "button1 btn mt") }}
+                    {% else %}
+                    <div class="table-headerH"><span class="w-NameH">------------</span> <span class="w-MacH">------------</span> <span class="w-countH">------------</span> <span class="w-LastDH">------------</span> <span class="w-LastTH">------------</span></li></div>
+                    {% endif %}
+             </form>
+        </div>
+    </div>
+{% endblock %}

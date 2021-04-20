@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define USBClientService_TargetDir=$(var.USBClientService.TargetDir)?>
+	 
+   <Product Id="*" Name="USBClientService" Language="1033" Version="1.0.0.0" Manufacturer="VT" UpgradeCode="59af9dc5-6fd5-4b93-bc53-b77ec29924ed">
+		
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="USBClientService" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="USBClientService" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+			
+      <Component Id="USBClientService.exe.config" Guid="6a2ed327-87cb-479d-a993-b82a65da2bfd">
+			  <File Id="USBClientService.exe.config"
+              Name="USBClientService.exe.config"
+              Source="$(var.USBClientService_TargetDir)USBClientService.exe.config"
+              KeyPath="yes" />
+			</Component>
+      
+			<Component Id="Newtonsoft.Json.dll" Guid="5a96766f-d19f-4c41-9659-2a8bd9d12cb3">
+			  <File Id="Newtonsoft.Json.dll"
+              Name="Newtonsoft.Json.dll"
+              Source="$(var.USBClientService_TargetDir)Newtonsoft.Json.dll"
+              KeyPath="yes" />
+			</Component>
+      
+			<Component Id="USBClientService.exe" Guid="2fdb116b-17f9-49bf-abe0-0a5a21d6f26d">
+			  <File Id="USBClientService.exe"
+              Name="USBClientService.exe"
+              Source="$(var.USBClientService_TargetDir)USBClientService.exe"
+              KeyPath="yes"/>
+
+        <ServiceInstall Id="ServiceInstaller" Type="ownProcess" Name="USBClientService" DisplayName="USB Client Service" Description="A Test Service that logs dummy text on an interval to a text file." Start="auto" ErrorControl="normal" />
+
+        <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="USBClientService" Wait="yes" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

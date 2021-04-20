@@ -1,0 +1,38 @@
+{% extends "menu.html" %}
+{% block contant%}
+<div class="search-menu contant">
+    <div class="user-info line-bottom">
+        <span>{{ IdHostMac[1] }}</span>
+        <span>{{ IdHostMac[2] }}</span>
+         <span>{{IdHostMac[3] }}</span>
+    </div>
+    <div class="spoiler-zagolovok-search button1">Видалити</div>
+    <div class="spoiler-search-body">
+        <form id="formSearch" method="POST" action="/delete_childe"  class = "flex-container">
+            {{ form.hidden_tag() }}
+            <div class="flex-container-inside">
+                <div>
+                    {{ form.dateFrom.label}}
+                    {{ form.dateFrom(id = "dFrom", class_ = "input-field-syle wDate input-margin") }}
+                </div>
+                <div>
+                    {{ form.dateTo.label}}
+                    {{ form.dateTo(id="dTo", class_ = "input-field-syle wDate input-margin") }}
+                </div>
+            </div>
+            <input type="hidden" name="idpage" value={{id}}>
+            <div>
+               {{ form.submit( class_ = "button1 btn btn-width") }}
+            </div>
+        </form>
+    </div>
+    <div class="table-header line-bottom"><span class="w-t-data">Дата</span> <span class="w-t-time">Час</span> <span class="w-t-type">Тип події</span> <span class="w-t-VID">VID</span><span class="w-t-PID">PID</span><span class="w-t-SN">Серійний номер</span></div>
+    {% if listUsbEvent %}
+        {% for v in listUsbEvent %}
+            <div class="table-row line-bottom"><span class="w-t-data">{{v[0]}}</span><span class="w-t-time">{{v[1]}}</span> <span class="w-t-type">{{v[2]}}</span> <span class="w-t-VID">{{v[3]}}</span> <span class="w-t-PID">{{v[4]}}</span><span class="w-t-SN">{{v[5]}}</span></div>
+        {% endfor %}
+    {% else %}
+        <div class="thead"><span class="wM">------------</span> <span class="wM">------------</span> <span class="wL">------------</span> <span class="wL">------------</span> <span class="wL">------------</span></li></div>
+    {% endif %} 
+    </div>   
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "menu.html" %}
+{% block contant%}
+<div class = "contant">
+    <h1 class="line-bottom hMargin">Події на хостах</h1>
+    <form method="POST" action="/">
+        {{ form.hidden_tag() }}
+        {{ form.hostname(class_ = "input-field-syle inputH",  placeholder="Введіть ім'я" ) }}
+        {{ form.mac(class_ = "input-field-syle inputH", placeholder="Введіть мак-адресу")}}
+        <button class="button1 btn btn-width" type="submit"> Знайти </button>
+    </form>
+    
+    <div class="table-headerH line-bottom hcenter"><span class="w-NameH">Ім'я</span> <span class="w-MacH">IP/Мак-адреса</span> <span class="w-countH">Кількість подій</span> <span class="w-LastDH">Остання дата</span> <span class="w-LastTH">Останій час</span></div>
+    {% if allUsbEvent %}
+        {% for v in allUsbEvent %}
+        <a href="{{ url_for('usbevent', id=v[0])}}"><div class="table-rowH line-bottom hcenter"><span class="w-NameH">{{v[1]}}</span><span class="w-MacH">{{v[6]}}<br>{{v[2]}}</span> <span class="w-countH">{{v[3]}}</span> <span class="w-LastDH">{{v[4]}}</span> <span class="w-LastTH">{{v[5]}}</span></div></a>
+        {% endfor %}
+    {% else %}
+    <div class="table-headerH"><span class="w-NameH">------------</span> <span class="w-MacH">------------</span> <span class="w-countH">------------</span> <span class="w-LastDH">------------</span> <span class="w-LastTH">------------</span></li></div>
+    {% endif %}
+
+</div>
+{% endblock %}
