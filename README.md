@@ -108,6 +108,10 @@ After service installation, it is necessary to set network parameters otherwise 
 **Nginx**
 - **port** : 80
 
+**Web App login**
+- **login** : ADMIN_USER
+- **password** : 12345
+
 **pgadmin**
 - **port** : 81
 - **email** : example@domain.com
