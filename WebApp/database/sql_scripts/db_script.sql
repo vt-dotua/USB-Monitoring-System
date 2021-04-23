@@ -86,6 +86,38 @@ end
 $$
 language plpgsql;
 
+--FUNCTIONS
+CREATE or REPLACE FUNCTION update_net_info(_userpc varchar, _dmac varchar, _mac varchar, _ip varchar)
+returns int as $$ declare userid int;
+begin
+    IF( select count(*) from UserEvent where userpc = _userpc and dmac = _dmac) = 0
+    THEN
+       insert INTO UserEvent(userpc, dmac)
+            values(_userpc, _dmac);
+       select id into userid from userevent u 
+            where u.userpc = _userpc and u.dmac = _dmac;
+       insert INTO net_info(id, userpc,ip, mac) 
+            values(userid, _userpc, _ip, _mac);
+       if found THEN
+            return 1;
+       else return 0;
+       end if; 
+	ELSE
+        select id into userid from userevent u 
+            where u.userpc = _userpc and u.dmac = _dmac;
+
+        UPDATE net_info
+        SET mac = _mac, ip = _ip
+        WHERE id = userid;
+        if found THEN
+            return 1;
+        else return 0;
+        end if;
+    END IF;
+end 
+$$
+language plpgsql;
+
 select * from insert_usb_event (
      'ExamplePC',
      'C85B76F76777',
