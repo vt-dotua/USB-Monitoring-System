@@ -49,7 +49,7 @@ namespace USBServerService
                 }
                 while (stream.DataAvailable);
                 string message = builder.ToString();
-                string schemaJson1 = @"{ 'date' : 'string',
+                string schemaJson = @"{ 'date' : 'string',
                                          'time':'string',
                                          'USBeventType':'string',
                                          'VID':'string',
@@ -58,35 +58,17 @@ namespace USBServerService
                                          'macAddress':'string',
                                          'hostName':'string',
                                          'ip' :'string',
-                                         'mac': 'string',
-                                         'massageType': 'string'}";
+                                         'mac': 'string'}";
 
-                string schemaJson2 = @"{ 'macAddress':'string',
-                                         'hostName':'string',
-                                         'ip' :'string',
-                                         'mac': 'string',
-                                         'massageType': 'string'}";
-
-                JsonSchema schema1 = JsonSchema.Parse(schemaJson1);
-                JsonSchema schema2 = JsonSchema.Parse(schemaJson2);
+                JsonSchema schema = JsonSchema.Parse(schemaJson);
                 JObject usbEventInfo = JObject.Parse(message);
-                bool valid1 = usbEventInfo.IsValid(schema1);
-                bool valid2 = usbEventInfo.IsValid(schema2);
-                if (valid1 || valid2)
+                bool valid = usbEventInfo.IsValid(schema);
+         
+                if (valid)
                 {
-
-                    if ((string)usbEventInfo["massageType"] == "1")
-                    {
-                        db = new DB_Worker(eventLog1, Username, Host, DBPort, Password, DB);
-                        db.Open();
-                        db.insert_usb_event(usbEventInfo);
-                    }
-                    else if ((string)usbEventInfo["massageType"] == "2")
-                    {
-                        db = new DB_Worker(eventLog1, Username, Host, DBPort, Password, DB);
-                        db.Open();
-                        db.insert_start_info(usbEventInfo);
-                    }
+                    db = new DB_Worker(eventLog1, Username, Host, DBPort, Password, DB);
+                    db.Open();
+                    db.insert_usb_event(usbEventInfo);
                 }
                 else
                 {

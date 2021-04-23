@@ -53,15 +53,5 @@ namespace USBServerService
             cmd.Parameters.AddWithValue("typeevent", NpgsqlDbType.Varchar, (string)usbEventInfo["USBeventType"]);
             cmd.ExecuteNonQuery();
         }
-        public void insert_start_info(JObject usbEventInfo)
-        {
-            var sql = "select * from update_net_info(:userpc, :dmac, :mac, :ip)";
-            var cmd = new NpgsqlCommand(sql, con);
-            cmd.Parameters.AddWithValue("userpc", NpgsqlDbType.Varchar, (string)usbEventInfo["hostName"]);
-            cmd.Parameters.AddWithValue("dmac"  , NpgsqlDbType.Varchar, (string)usbEventInfo["macAddress"]);
-            cmd.Parameters.AddWithValue("mac"   , NpgsqlDbType.Varchar, (string)usbEventInfo["mac"]);
-            cmd.Parameters.AddWithValue("ip"    , NpgsqlDbType.Varchar, (string)usbEventInfo["ip"]);
-            cmd.ExecuteNonQuery();
-        }
     }
 }

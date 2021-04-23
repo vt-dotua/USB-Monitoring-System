@@ -50,7 +50,7 @@ namespace USBClientService
             }
 
             eventLog1.Source = "EventUSBService";
-            eventLog1.Log = "USBServiceLog";
+            eventLog1.Log    = "USBServiceLog";
 
             try
             {
@@ -79,13 +79,7 @@ namespace USBClientService
                 eventLog1.WriteEntry("Не вдалося встановити початкові IP та Port за допомогоюреєстру : " + ex, EventLogEntryType.Error, 10);
             }
 
-            Dictionary<string,
-            string> HostInfo = null;
-            CollectInfo collectData = new CollectInfo(eventLog1);
-            HostInfo = collectData.LaunchCollectData();
-            string output = JsonConvert.SerializeObject(HostInfo);
-            NetConnection TCPConnection = new NetConnection();
-            TCPConnection.SendData(Convert.ToString(output), ip, port, eventLog1);
+            Dictionary<string, string> HostInfo = null;
             eventLog1.WriteEntry("Служба почала роботу!", EventLogEntryType.Information, 1);
             USBEventWatcher.Start();
         }

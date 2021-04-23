@@ -6,11 +6,14 @@ from   psycopg2.extensions import AsIs
 class SQLdb(object):
     """description of class"""
     def __init__(self):
-        db_name = os.getenv("DATABASE_NAME")
-        db_user = os.getenv("DATABASE_USER")
-        db_password = os.getenv("DATABASE_PASSWORD") 
+        #db_name = os.getenv("DATABASE_NAME")
+        #db_user = os.getenv("DATABASE_USER")
+        #db_password = os.getenv("DATABASE_PASSWORD")
+        db_name = "usbapp"
+        db_user = "postgres"
+        db_password = "example"
         self.connection = psycopg2.connect(dbname=db_name, user=db_user, 
-                        password=db_password, host='db', cursor_factory = DictCursor)
+                        password=db_password, port='5433', host='localhost', cursor_factory = DictCursor)
         self.connection.autocommit = True
         self.cursor = self.connection.cursor()
 
