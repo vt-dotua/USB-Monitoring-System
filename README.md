@@ -63,25 +63,25 @@ Demonstration of how user can view and analyze events:
 
 ![](https://raw.githubusercontent.com/vt-dotua/USB-Monitoring-System/main/screenshots/main_functions2.gif)
 
-After authorization, users get access to the main page on which they can see a list of computers on which the USB device connection events have occurred. Users can choose a particular computer to revise detailed information about host events. If it is needed to filter data user can click the **search** button and input the necessary parameters.
+After authorization, users go to the main page where they can see a list of computers on which USB device connection events occurred. A particular computer can be chosen to review detailed information about host events. If this is necessary to filter the data, users can click on the **Search** button and enter the necessary parameters.  
 
 Demonstration of how user can delete irrelevant or unnecessary information:
 
 ![](https://github.com/vt-dotua/USB-Monitoring-System/blob/main/screenshots/event_del.gif?raw=true)
 
-Users only with administrator rights have access to this functionality. To conduct this action user should click the **clean event** button. After that user can delete all information about the host or choose the particular host for removing events by the time parameter.
+Only users with admin permissions have access to this feature. To remove unneeded data, you can click the **Clean Event** button. After that, you can delete all the information about the host or choose the particular host to delete the events using the time parameter.
 
 User management demonstration:
 
 ![](https://github.com/vt-dotua/USB-Monitoring-System/blob/main/screenshots/user_management.gif?raw=true)
 
-Users with administrator rights have access to the user management panel which allows them to create and delete users. To add a new user's account you need to fill the form and click the **add** button. To delete a user's account choose the needed ones and click the **delete** button.
+Users with admin rights have access to the User Management Panel, which allows them to create and delete users. To add a new user's account, complete the form and click **Add**. To delete the user's account, select the required accounts and click the **Remove** button.
 
 Service setting tools demonstration:
 
 ![](https://github.com/vt-dotua/USB-Monitoring-System/blob/main/screenshots/tools.gif?raw=true)
 
-After service installation, it is necessary to set network parameters otherwise default parameters will be unchanged. Launch tools with admin rights, fill the form, and click the **apply** button. After that parameter will be applied and services relaunched.
+After service installation, it is necessary to set network parameters otherwise default parameters will be unchanged. Run the tools with the administrator rights, complete the form and click the **Apply** button. After that parameter will be applied and services relaunched. 
 
 ## Installation
 1. [Download](https://github.com/vt-dotua/USB-Monitoring-System/releases/download/v1.0/Release.zip) the latest release.
