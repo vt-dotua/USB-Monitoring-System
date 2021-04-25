@@ -10,7 +10,7 @@ USB Monitoring System is software that allows you to keep track of the connectio
 - [Default parameters](#default-parameters)
 
 ## About
-The small size and significant storage capacity make the USB stick an ideal tool for carrying out cyberattacks that prompt more and more companies to think about measures to protect against this threat. The purpose of this project is the procedure simplification of controlling the usage of USB sticks and meet the needs of small companies that can't afford to purchase SIEM systems.
+The small size and significant storage capacity make the USB stick an ideal tool for carrying out cyberattacks that prompt more and more companies to think about measures to protect against this threat. This project aims to simplify the usage controlling of USB sticks and meet the needs of small companies that can't afford to purchase SIEM systems.
 
 ## Features
 This system can allow you to:
